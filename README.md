@@ -8,4 +8,4 @@ Source repository for the interactive developer hub at **[sentiogate.github.io](
 ### Features
 * **Zero build step needed:** Native single-file HTML5/Tailwind/CSS with interactive simulator.
 * **Automatic GitHub Pages Hosting:** Push this repo directly to `SentioGate/sentiogate.github.io` with GitHub Pages configured to deploy from branch `main` root `/`.
-* **High authority backlink network:** Fully linked with canonical tags to `https://sentiogate.app`.
+* **Canonical link:** points to `https://sentiogate.app`.

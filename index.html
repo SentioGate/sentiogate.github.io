@@ -9,7 +9,7 @@
   
   <!-- Open Graph -->
   <meta property="og:title" content="SentioGate Developer Hub • Zero-Markup AI LLM Router">
-  <meta property="og:description" content="One OpenAI-compatible endpoint with sub-20ms routing, BYOK privacy, and automated multi-provider failover.">
+  <meta property="og:description" content="One OpenAI-compatible endpoint with BYOK, 0% token markup, and routing that automatically falls back to another model if one fails.">
   <meta property="og:url" content="https://sentiogate.github.io">
   <meta property="og:type" content="website">
 
@@ -94,13 +94,13 @@
     <div class="text-center max-w-3xl mx-auto">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-6">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>0% Token Markup • Sub-20ms Routing • Strict BYOK</span>
+        <span>0% Token Markup • OpenAI-Compatible • BYOK</span>
       </div>
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
-        Intelligent AI Router for High-Performance Teams
+        One Endpoint. Your Keys. Zero Markup.
       </h1>
       <p class="text-lg text-slate-300 leading-relaxed mb-8">
-        One unified OpenAI-compatible endpoint that dynamically routes prompts to the fastest, cheapest, or highest-availability frontier models across OpenAI, Anthropic, Gemini, DeepSeek, and Groq.
+        One OpenAI-compatible endpoint that routes each request by cost, quality or latency across your own provider keys (OpenAI, Anthropic, Gemini, DeepSeek, Groq and more), and automatically falls back to another model if one fails.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -120,12 +120,12 @@
         <div>
           <span class="text-xs uppercase font-bold tracking-wider text-cyan-400 font-mono">Interactive Architecture</span>
           <h2 class="text-xl sm:text-2xl font-bold text-white">Dynamic Routing Simulator</h2>
-          <p class="text-sm text-slate-400">Select routing preference to see real-time target selection and failover cascade.</p>
+          <p class="text-sm text-slate-400">Illustration only: pick a <code>route_preference</code> to see how the router chooses a target. Not live data.</p>
         </div>
         <div class="inline-flex p-1 bg-slate-950 rounded-lg border border-slate-800 text-xs font-mono">
-          <button onclick="setRoutingMode('fastest')" id="btn-fastest" class="px-3 py-1.5 rounded-md bg-indigo-600 text-white transition">auto:fastest</button>
-          <button onclick="setRoutingMode('cost')" id="btn-cost" class="px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition">auto:cost-efficient</button>
-          <button onclick="setRoutingMode('reliable')" id="btn-reliable" class="px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition">auto:reliable</button>
+          <button onclick="setRoutingMode('cost')" id="btn-cost" class="px-3 py-1.5 rounded-md bg-indigo-600 text-white transition">cost</button>
+          <button onclick="setRoutingMode('quality')" id="btn-quality" class="px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition">quality</button>
+          <button onclick="setRoutingMode('latency')" id="btn-latency" class="px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition">latency</button>
         </div>
       </div>
 
@@ -135,14 +135,11 @@
           <div class="text-slate-400 mb-2">// Incoming Request</div>
           <div class="text-cyan-400">POST /v1/chat/completions</div>
           <div class="text-slate-300 mt-2">{</div>
-          <div class="pl-4 text-slate-300">"model": <span id="sim-model-tag" class="text-amber-400">"auto:fastest"</span>,</div>
-          <div class="pl-4 text-slate-300">"prompt": "Analyze dataset..."</div>
+          <div class="pl-4 text-slate-300">"model": <span class="text-amber-400">"auto"</span>,</div>
+          <div class="pl-4 text-slate-300">"route_preference": <span id="sim-model-tag" class="text-amber-400">"cost"</span>,</div>
+          <div class="pl-4 text-slate-300">"messages": [ ... ]</div>
           <div class="text-slate-300">}</div>
 
-          <div class="mt-4 pt-4 border-t border-slate-800">
-            <span class="text-slate-500">Routing Overhead:</span>
-            <span class="text-emerald-400 font-bold ml-1">14.2 ms</span>
-          </div>
         </div>
 
         <!-- Router Engine Decision -->
@@ -150,13 +147,13 @@
           <div>
             <div class="flex items-center space-x-2 text-indigo-400 text-xs font-mono mb-2">
               <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
-              <span>Intelligent Decision Engine</span>
+              <span>Routing Decision</span>
             </div>
-            <div class="text-sm font-semibold text-slate-200" id="sim-decision-title">Selecting Lowest TTFT Provider</div>
-            <p class="text-xs text-slate-400 mt-1" id="sim-decision-desc">Groq & Gemini Flash currently exhibiting sub-220ms time-to-first-token in your region.</p>
+            <div class="text-sm font-semibold text-slate-200" id="sim-decision-title">Cheapest suitable model</div>
+            <p class="text-xs text-slate-400 mt-1" id="sim-decision-desc">The default: picks the lowest-cost model that fits the request from the providers you have keys for.</p>
           </div>
           <div class="mt-4 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-xs font-mono text-slate-300">
-            <span class="text-indigo-400">Failover Guard:</span> 3 replicas armed
+            <span class="text-indigo-400">Fallback:</span> automatically falls back to another model if one fails
           </div>
         </div>
 
@@ -165,9 +162,9 @@
           <div>
             <div class="text-slate-400 text-xs font-mono mb-2">// Active Target</div>
             <div class="text-base font-bold text-emerald-400 flex items-center space-x-2" id="sim-target-name">
-              <span>⚡ Groq / Llama-3.3-70B</span>
+              <span>💰 A lower-cost model</span>
             </div>
-            <div class="text-xs text-slate-400 mt-1" id="sim-target-stats">Estimated TTFT: 198ms • Cost: $0.59/M tokens</div>
+            <div class="text-xs text-slate-400 mt-1" id="sim-target-stats">Billed by your provider at its own rates</div>
           </div>
           <div class="mt-4 flex items-center space-x-2 text-xs text-slate-400">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -181,7 +178,7 @@
     <section id="sdks" class="mt-20">
       <div class="text-center max-w-2xl mx-auto mb-10">
         <h2 class="text-2xl sm:text-3xl font-bold text-white">Zero-Friction Client SDKs</h2>
-        <p class="text-slate-400 mt-2">Zero dependencies, drop-in replacement, native streaming, and automated retry mechanisms.</p>
+        <p class="text-slate-400 mt-2">Zero dependencies, streaming, and opt-in retries that honour Retry-After.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -192,19 +189,20 @@
               <span class="text-2xl">🐍</span>
               <div>
                 <h3 class="font-bold text-lg text-white">sentiogate-python</h3>
-                <span class="text-xs text-slate-400 font-mono">pip install sentiogate</span>
+                <span class="text-xs text-slate-400 font-mono">pip install sentiogate-python</span>
               </div>
             </div>
             <a href="https://github.com/SentioGate/sentiogate-python" target="_blank" class="text-xs text-cyan-400 hover:underline">GitHub Repo ↗</a>
           </div>
-          <pre class="bg-slate-950 p-4 rounded-xl text-xs text-slate-300 font-mono overflow-x-auto border border-slate-800/80"><code>from sentiogate import SentioGate
+          <pre class="bg-slate-950 p-4 rounded-xl text-xs text-slate-300 font-mono overflow-x-auto border border-slate-800/80"><code>from sentiogate import AutoRouterClient
 
-client = SentioGate(api_key="sg_live_...")
-response = client.chat.completions.create(
-    model="auto:fastest",
-    messages=[{"role": "user", "content": "Hello world!"}]
+client = AutoRouterClient(api_key="sg_live_...")
+response = client.chat(
+    model="auto",
+    messages=[{"role": "user", "content": "Hello world!"}],
+    extra_body={"route_preference": "latency"},
 )
-print(response.choices[0].message.content)</code></pre>
+print(response["choices"][0]["message"]["content"])</code></pre>
           <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
             <span>Zero external dependencies</span>
             <a href="https://sentiogate.app/docs" target="_blank" class="hover:text-white transition">Python Docs →</a>
@@ -223,16 +221,20 @@ print(response.choices[0].message.content)</code></pre>
             </div>
             <a href="https://github.com/SentioGate/sentiogate-js" target="_blank" class="text-xs text-cyan-400 hover:underline">GitHub Repo ↗</a>
           </div>
-          <pre class="bg-slate-950 p-4 rounded-xl text-xs text-slate-300 font-mono overflow-x-auto border border-slate-800/80"><code>import { SentioGate } from "@sentiogate/sdk";
+          <pre class="bg-slate-950 p-4 rounded-xl text-xs text-slate-300 font-mono overflow-x-auto border border-slate-800/80"><code>import { AutoRouter } from "@sentiogate/sdk";
 
-const gate = new SentioGate({ apiKey: "sg_live_..." });
-const res = await gate.chat.completions.create({
-  model: "auto:cost-efficient",
-  messages: [{ role: "user", content: "Optimize SQL" }]
+const router = new AutoRouter({
+  baseUrl: "https://api.sentiogate.dev",
+  apiKey: "sg_live_...",
+});
+const res = await router.chat({
+  model: "auto",
+  messages: [{ role: "user", content: "Optimize SQL" }],
+  extraBody: { route_preference: "cost" },
 });
 console.log(res.choices[0].message.content);</code></pre>
           <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
-            <span>Node.js, Bun, Edge, Workers</span>
+            <span>Node.js, Bun, Deno, edge runtimes</span>
             <a href="https://sentiogate.app/docs" target="_blank" class="hover:text-white transition">TypeScript Docs →</a>
           </div>
         </div>
@@ -244,60 +246,13 @@ console.log(res.choices[0].message.content);</code></pre>
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
           <span class="text-xs uppercase font-bold tracking-wider text-cyan-400 font-mono">Performance & Benchmarks</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Routing Latency & Overhead</h2>
-          <p class="text-slate-400 text-sm mt-1">Open, reproducible benchmark tests run 24/7 across multi-region edge clusters.</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Measure It Yourself</h2>
+          <p class="text-slate-400 text-sm mt-1">Open benchmark scripts: run them against SentioGate and direct provider endpoints with your own keys and compare the results.</p>
         </div>
         <a href="https://sentiogate.app/benchmarks" target="_blank" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 flex items-center space-x-1">
-          <span>View Live Uptime & Graphs</span>
+          <span>View Benchmarks</span>
           <span>↗</span>
         </a>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse text-sm">
-          <thead>
-            <tr class="border-b border-slate-800 text-slate-400 font-mono text-xs">
-              <th class="py-3 px-4">Provider / Engine</th>
-              <th class="py-3 px-4">Median TTFT</th>
-              <th class="py-3 px-4">Routing Overhead</th>
-              <th class="py-3 px-4">Automatic Failover</th>
-              <th class="py-3 px-4">Token Markup</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800/60 font-mono text-xs text-slate-300">
-            <tr class="bg-indigo-950/20 font-semibold text-white">
-              <td class="py-3.5 px-4 flex items-center space-x-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>SentioGate Router</span>
-              </td>
-              <td class="py-3.5 px-4 text-emerald-400">196 ms</td>
-              <td class="py-3.5 px-4 text-emerald-400">&lt; 18 ms</td>
-              <td class="py-3.5 px-4 text-emerald-400">&lt; 45 ms</td>
-              <td class="py-3.5 px-4 text-emerald-400">0% (Zero)</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4">Direct OpenAI Baseline</td>
-              <td class="py-3.5 px-4">182 ms</td>
-              <td class="py-3.5 px-4 text-slate-500">0 ms (Direct)</td>
-              <td class="py-3.5 px-4 text-rose-400">Manual / Outage risk</td>
-              <td class="py-3.5 px-4 text-slate-400">Direct rates</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4">OpenRouter Resale</td>
-              <td class="py-3.5 px-4">245 ms</td>
-              <td class="py-3.5 px-4 text-amber-400">~ 63 ms</td>
-              <td class="py-3.5 px-4 text-amber-400">Retry only</td>
-              <td class="py-3.5 px-4 text-rose-400">5% – 10% Markup</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4">Self-Hosted LiteLLM</td>
-              <td class="py-3.5 px-4">218 ms</td>
-              <td class="py-3.5 px-4 text-slate-400">~ 36 ms</td>
-              <td class="py-3.5 px-4 text-slate-400">Config dependent</td>
-              <td class="py-3.5 px-4 text-slate-400">Self-managed server cost</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
       <div class="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
@@ -344,26 +299,26 @@ console.log(res.choices[0].message.content);</code></pre>
 
   <script>
     const modes = {
-      fastest: {
-        tag: '"auto:fastest"',
-        title: 'Selecting Lowest TTFT Provider',
-        desc: 'Groq & Gemini Flash currently exhibiting sub-220ms time-to-first-token in your region.',
-        target: '⚡ Groq / Llama-3.3-70B',
-        stats: 'Estimated TTFT: 198ms • Cost: $0.59/M tokens'
-      },
       cost: {
-        tag: '"auto:cost-efficient"',
-        title: 'Selecting Optimal Price-to-Quality Replica',
-        desc: 'DeepSeek-V3 and Gemini 1.5 Flash selected for maximum token efficiency.',
-        target: '💰 DeepSeek / V3-Chat',
-        stats: 'Estimated TTFT: 310ms • Cost: $0.14/M tokens'
+        tag: '"cost"',
+        title: 'Cheapest suitable model',
+        desc: 'The default: picks the lowest-cost model that fits the request from the providers you have keys for.',
+        target: '💰 A lower-cost model',
+        stats: 'Billed by your provider at its own rates'
       },
-      reliable: {
-        tag: '"auto:reliable"',
-        title: 'Prioritizing 99.99% Availability & Resilience',
-        desc: 'Dual-active connection with OpenAI GPT-4o backed by Claude 3.5 Sonnet instant circuit breaker.',
-        target: '🛡️ OpenAI GPT-4o (Dual-Active)',
-        stats: 'Uptime SLA: 99.99% • Sub-50ms Hot Failover'
+      quality: {
+        tag: '"quality"',
+        title: 'Strongest suitable model',
+        desc: 'Prefers higher-quality models for the request, even when they cost more.',
+        target: '🎯 A higher-quality model',
+        stats: 'Billed by your provider at its own rates'
+      },
+      latency: {
+        tag: '"latency"',
+        title: 'Fastest suitable model',
+        desc: 'Prefers models that have recently answered fastest.',
+        target: '⚡ A faster model',
+        stats: 'Billed by your provider at its own rates'
       }
     };
 
@@ -374,7 +329,7 @@ console.log(res.choices[0].message.content);</code></pre>
       document.getElementById('sim-target-name').innerText = modes[mode].target;
       document.getElementById('sim-target-stats').innerText = modes[mode].stats;
 
-      ['fastest', 'cost', 'reliable'].forEach(m => {
+      ['cost', 'quality', 'latency'].forEach(m => {
         const btn = document.getElementById('btn-' + m);
         if (m === mode) {
           btn.className = 'px-3 py-1.5 rounded-md bg-indigo-600 text-white transition';
