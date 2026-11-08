@@ -70,11 +70,12 @@
       </div>
 
       <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+        <a href="#mcp" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors">MCP Server</a>
         <a href="#simulator" class="hover:text-cyan-400 transition-colors">Router Simulator</a>
         <a href="#sdks" class="hover:text-cyan-400 transition-colors">SDKs</a>
+        <a href="#hermes-bot" class="hover:text-cyan-400 transition-colors">Senti Bot (Hermes)</a>
         <a href="#benchmarks" class="hover:text-cyan-400 transition-colors">Benchmarks</a>
         <a href="https://sentiogate.app/docs" target="_blank" class="hover:text-cyan-400 transition-colors">Documentation ↗</a>
-        <a href="https://sentiogate.app/compare" target="_blank" class="hover:text-cyan-400 transition-colors">Comparison ↗</a>
       </nav>
 
       <div class="flex items-center space-x-3">
@@ -92,27 +93,106 @@
   <!-- Hero Section -->
   <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20 flex-grow">
     <div class="text-center max-w-3xl mx-auto">
-      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-6">
+      <div class="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-6">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>0% Token Markup • OpenAI-Compatible • BYOK</span>
+        <span>NEW: Official MCP Server Live (@sentiogate/mcp) • 0% Token Markup • BYOK</span>
       </div>
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
         One Endpoint. Your Keys. Zero Markup.
       </h1>
       <p class="text-lg text-slate-300 leading-relaxed mb-8">
-        One OpenAI-compatible endpoint that routes each request by cost, quality or latency across your own provider keys (OpenAI, Anthropic, Gemini, DeepSeek, Groq and more), and automatically falls back to another model if one fails.
+        One OpenAI-compatible endpoint &amp; Model Context Protocol (MCP) Control Plane that routes each request by cost, quality or latency across your own provider keys (OpenAI, Anthropic, Gemini, DeepSeek, Groq and more), and automatically falls back to another model if one fails.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="https://sentiogate.app" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold shadow-lg shadow-indigo-500/25 transition">
           Start for Free on SentioGate.app ↗
         </a>
-        <a href="https://github.com/SentioGate" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold transition flex items-center justify-center space-x-2">
-          <span>GitHub Organization</span>
-          <span class="text-xs text-slate-400 font-mono">★</span>
+        <a href="https://github.com/SentioGate/sentiogate-mcp" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/40 text-cyan-300 font-semibold transition flex items-center justify-center space-x-2">
+          <span>⚡ Install MCP Server</span>
+          <span class="text-xs text-cyan-400 font-mono">npx @sentiogate/mcp</span>
+        </a>
+        <a href="https://sentiogate.cloud" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold transition flex items-center justify-center space-x-2">
+          <span>Senti Bot &amp; Coding Dsh (.cloud) ↗</span>
         </a>
       </div>
     </div>
+
+    <!-- MCP Control Plane Showcase -->
+    <section id="mcp" class="mt-16 border border-cyan-500/30 rounded-2xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 backdrop-blur p-6 sm:p-8 shadow-2xl shadow-cyan-500/5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-xs uppercase font-bold tracking-wider text-cyan-400 font-mono mb-1">
+            <span>Model Context Protocol (2025-03-26 &amp; 2024-11-05)</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Active on Official Registry</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">SentioGate MCP FinOps &amp; Router Control Plane</h2>
+          <p class="text-sm text-slate-400 mt-1">Audit LLM spend waste, inspect live Vault key ledgers, pre-flight tool calls for safety/loops, compress payloads, and delegate sub-tasks from Claude Code, Cursor, Cline, Grok, and Hermes Agent.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <a href="https://www.npmjs.com/package/@sentiogate/mcp" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-cyan-400 hover:border-cyan-500 transition">npm: @sentiogate/mcp ↗</a>
+          <a href="https://github.com/SentioGate/sentiogate-mcp" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 hover:border-slate-500 transition">GitHub Repo ↗</a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-6">
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span>// 1. Local Stdio Bridge (Claude Desktop, Cursor, Cline, Hermes)</span>
+              <span class="text-emerald-400">Zero Dependencies</span>
+            </div>
+            <pre class="text-slate-200 overflow-x-auto"><code>{
+  "mcpServers": {
+    "sentiogate": {
+      "command": "npx",
+      "args": ["-y", "@sentiogate/mcp"],
+      "env": {
+        "SENTIOGATE_API_KEY": "sg_live_your_gateway_key"
+      }
+    }
+  }
+}</code></pre>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span>// 2. Remote Streamable HTTP Endpoint (Zero Install)</span>
+              <span class="text-cyan-400">POST / GET / DELETE</span>
+            </div>
+            <div class="text-cyan-300 break-all">https://api.sentiogate.dev/v1/mcp</div>
+            <div class="text-slate-400 mt-1">Header: <span class="text-slate-200">Authorization: Bearer sg_live_...</span></div>
+            <div class="text-slate-500 mt-1">Registry ID: <span class="text-slate-300">io.github.SentioGate/sentiogate-mcp</span></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-cyan-400">sentiogate_audit_waste</div>
+            <p class="text-slate-400 mt-1">Audit JSONL/CSV/JSON logs against your Vault models to calculate recoverable spend.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-emerald-400">sentiogate_get_finops_ledger</div>
+            <p class="text-slate-400 mt-1">Inspect real-time provider spend, key health, cooldowns, and free pool quota.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-indigo-400">sentiogate_recommend_model</div>
+            <p class="text-slate-400 mt-1">Rank models by cost, quality, or latency using empirical task &amp; TTFT stats.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-amber-400">sentiogate_guard_check</div>
+            <p class="text-slate-400 mt-1">Pre-flight tool calls and shell commands for destructive actions and agent loops.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-purple-400">sentiogate_optimize_payload</div>
+            <p class="text-slate-400 mt-1">Simulate context compaction &amp; tool-output pruning to measure exact token savings.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800">
+            <div class="font-mono font-bold text-pink-400">sentiogate_delegate_prompt</div>
+            <p class="text-slate-400 mt-1">Delegate sub-tasks through <code>model: "auto"</code> or enqueue async community batches.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Interactive Routing Simulator Widget -->
     <section id="simulator" class="mt-20 border border-slate-800 rounded-2xl bg-slate-900/60 backdrop-blur p-6 sm:p-8 shadow-2xl">
@@ -238,6 +318,42 @@ console.log(res.choices[0].message.content);</code></pre>
             <a href="https://sentiogate.app/docs" target="_blank" class="hover:text-white transition">TypeScript Docs →</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Senti Bot & Hermes Harness Ecosystem Section -->
+    <section id="hermes-bot" class="mt-20 border border-indigo-500/30 rounded-2xl bg-slate-900/60 p-6 sm:p-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-wider text-indigo-400 font-mono">Autonomous Agent Cloud • sentiogate.cloud</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Senti Bot &amp; Coding Dashboard on the Hermes Harness</h2>
+          <p class="text-sm text-slate-400 mt-1">We standardized on the <strong>Nous Hermes Agent harness</strong> (replacing Pi) for both our personal multi-channel bot and autonomous coding dashboard — uniting self-improving skills, native <code>@sentiogate/mcp</code> FinOps controls, and 5.2× faster BYOK edge routing vs OpenRouter.</p>
+        </div>
+        <a href="https://sentiogate.cloud" target="_blank" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold whitespace-nowrap transition">
+          Explore Senti Bot (.cloud) ↗
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 text-xs">
+        <a href="https://sentiogate.cloud" target="_blank" class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500/50 transition block">
+          <div class="font-bold text-cyan-400 mb-1">sentiogate.cloud ↗</div>
+          <div class="text-white font-semibold mb-1">Senti Bot &amp; Coding Dsh</div>
+          <p class="text-slate-400">Personal bot &amp; coding dashboard powered by the Hermes Agent harness + MCP Control Plane.</p>
+        </a>
+        <a href="https://sentiogate.dev" target="_blank" class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-indigo-500/50 transition block">
+          <div class="font-bold text-indigo-400 mb-1">sentiogate.dev ↗</div>
+          <div class="text-white font-semibold mb-1">US Developer Hub</div>
+          <p class="text-slate-400">US-East vs US-West sub-100ms latency benchmarks, Claude Code 429 failover, and vLLM/Ollama proxy.</p>
+        </a>
+        <a href="https://sentiogate.xyz" target="_blank" class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500/50 transition block">
+          <div class="font-bold text-emerald-400 mb-1">sentiogate.xyz ↗</div>
+          <div class="text-white font-semibold mb-1">UK &amp; EU FinOps Hub</div>
+          <p class="text-slate-400">GBP/EUR token calculators, GDPR Zero Data Retention compliance, and MCP FinOps waste auditing.</p>
+        </a>
+        <a href="https://sentiogate.com" target="_blank" class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-amber-500/50 transition block">
+          <div class="font-bold text-amber-400 mb-1">sentiogate.com ↗</div>
+          <div class="text-white font-semibold mb-1">India Regional Hub</div>
+          <p class="text-slate-400">INR (₹) token pricing, zero-forex BYOK guides, and free LLM API workflows for Indian developers.</p>
+        </a>
       </div>
     </section>
 
